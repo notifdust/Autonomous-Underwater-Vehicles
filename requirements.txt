@@ -1,0 +1,6 @@
+# Python dependencies for the AUV stack
+# Install with: pip install -r requirements.txt
+
+casadi
+numpy
+scipy

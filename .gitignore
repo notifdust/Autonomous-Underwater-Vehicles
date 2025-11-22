@@ -1,0 +1,25 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+build_isolated/
+devel_isolated/
+
+# Python cache
+*.pyc
+__pycache__/
+*.egg-info/
+
+# Gazebo logs
+.gazebo/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
