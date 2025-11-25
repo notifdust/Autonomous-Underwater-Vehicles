@@ -102,48 +102,31 @@ rosdep
 ```
  ---
 
-## Prerequisites
-
-bash
-Copia codice
-mkdir -p auv_ws/src
-cd auv_ws
-
-git clone https://your-repo-url.git src/auv_stack
-
-cd src/auv_stack
-pip install -r requirements.txt
-cd ../..
-
-rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install
-
----
 
 ## Usage
-1. Source the workspace
-bash
-Copia codice
+1. **Source the workspace**
+bash 
 source install/setup.bash
-2. Start simulation (Gazebo + all nodes)
+
+2. **Start simulation** (Gazebo + all nodes)
 bash
-Copia codice
+Copy the code
 ros2 launch auv_stack start_simulation.launch.py
 This:
 
-launches Gazebo,
+1. launches Gazebo,
 
-loads the underwater world,
+2. loads the underwater world,
 
-spawns the AUV model,
+3. spawns the AUV model,
 
-starts the mission planner, controller, thruster allocator, obstacle avoidance, and EKF.
+4. starts the mission planner, controller, thruster allocator, obstacle avoidance, and EKF.
 
-3. Visualization (optional)
+5. Visualization (optional)
 bash
 Copia codice
 rviz2
-Recommended topics:
+*Recommended topics*:
 
 /odometry/filtered — EKF fused state
 
@@ -186,14 +169,14 @@ package.xml, setup.py, requirements.txt
 
 
 ## How to Customize the AUV
-1. Thruster Layout (critical)
+1. *Thruster Layout* (critical)
 Update thruster positions/orientations in sdf/auv.sdf.
 
 Update the Thruster Configuration Matrix (self.B) in thruster_allocator.py.
 
 If they don’t match → unstable or incorrect motion.
 
-2. Hydrodynamic Parameters
+2. *Hydrodynamic Parameters*
 In sdf/auv.sdf, tune:
 
 added_mass
@@ -210,7 +193,7 @@ overall mass
 
 These parameters determine how the AUV behaves in water.
 
-3. MPC Tuning
+3. *MPC Tuning*
 Inside mpc_controller.py modify:
 
 Q → how strongly the controller follows the setpoint
@@ -221,7 +204,7 @@ prediction horizon
 
 control horizon
 
-4. EKF Tuning
+4. *EKF Tuning*
 Edit config/ekf.yaml:
 
 modify covariances,
@@ -235,16 +218,16 @@ adjust process noise.
 ## What You Can Build From This Template
 This stack is flexible and can support:
 
-AUV navigation experiments
+- AUV navigation experiments
 
-Reinforcement learning with realistic physics
+- Reinforcement learning with realistic physics
 
-Multi-AUV cooperative simulations
+- Multi-AUV cooperative simulations
 
-Obstacle avoidance benchmarking
+- Obstacle avoidance benchmarking
 
-Thruster fault tolerance algorithms
+- Thruster fault tolerance algorithms
 
-MPC and nonlinear control design
+- MPC and nonlinear control design
 
-High-level mission scripts for underwater inspection
+- High-level mission scripts for underwater inspection
