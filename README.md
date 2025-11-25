@@ -99,7 +99,10 @@ colcon (sudo apt install python3-colcon-common-extensions)
 
 rosdep
 
-## Installation
+ ---
+
+## Prerequisites
+
 bash
 Copia codice
 mkdir -p auv_ws/src
@@ -113,6 +116,9 @@ cd ../..
 
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
+
+---
+
 ## Usage
 1. Source the workspace
 bash
@@ -144,6 +150,8 @@ Recommended topics:
 
 /tf — frame transforms
 
+---
+
 ## Package Structure
 auv_stack/
 
@@ -172,6 +180,9 @@ config/
 ekf.yaml — EKF configuration
 
 package.xml, setup.py, requirements.txt
+
+---
+
 
 ## How to Customize the AUV
 1. Thruster Layout (critical)
@@ -217,6 +228,8 @@ modify covariances,
 enable/disable sensors,
 
 adjust process noise.
+
+---
 
 ## What You Can Build From This Template
 This stack is flexible and can support:
