@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="my_auv">
+    <link name="base_link">
+      <inertial>
+        <mass>100.0</mass>
+        <inertia>
+          <ixx>20.0</ixx>
+          <iyy>40.0</iyy>
+          <izz>40.0</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="visual">
+        <geometry><box><size>1.0 0.5 0.5</size></box></geometry>
+        <material><ambient>0.8 0.8 0.1 1</ambient></material>
+      </visual>
+      <collision name="collision">
+        <geometry><box><size>1.0 0.5 0.5</size></box></geometry>
+      </collision>
+      
+      <plugin name="HydrodynamicsPlugin" filename="libuuv_gazebo_hydrodynamic_model_plugin.so">
+        <link_name>base_link</link_name>
+        <added_mass>10 0 0 0 0 0 0 10 0 0 0 0 0 0 15 0 0 0 0 0 0 2 0 0 0 0 0 0 4 0 0 0 0 0 0 4</added_mass>
+        <linear_damping>50 0 0 0 0 0 0 70 0 0 0 0 0 0 100 0 0 0 0 0 0 10 0 0 0 0 0 0 20 0 0 0 0 0 0 20</linear_damping>
+      </plugin>
+
+      <plugin name="ThrusterPlugin" filename="libuuv_gazebo_thruster_plugin.so">
+        <topic>/thruster_commands</topic>
+        <thruster_id>0</thruster_id>
+        <gain>1.0</gain>
+        <pose>0.5 -0.25 0 0 0 0</pose> </plugin>
+      <plugin name="ThrusterPlugin_1" filename="libuuv_gazebo_thruster_plugin.so">
+        <topic>/thruster_commands</topic>
+        <thruster_id>1</thruster_id>
+        <gain>1.0</gain>
+        <pose>0.5 0.25 0 0 0 0</pose> </plugin>
+      <plugin name="IMUPlugin" filename="libgazebo_ros_imu_sensor.so">
+        <ros><namespace>/imu</namespace><remapping>~/out:=data</remapping></ros>
+      </plugin>
+      <plugin name="PressurePlugin" filename="libgazebo_ros_fluid_pressure.so">
+        <ros><namespace>/pressure</namespace><remapping>~/out:=data</remapping></ros>
+      </plugin>
+      <plugin name="SonarPlugin" filename="libgazebo_ros_gpu_laser.so">
+        <ros><namespace>/sonar</namespace><remapping>~/out:=scan</remapping></ros>
+        <scan>
+          <horizontal><samples>100</samples><resolution>1</resolution><min_angle>-1.57</min_angle><max_angle>1.57</max_angle></horizontal>
+        </scan>
+        <range><min>0.5</min><max>50.0</max><resolution>0.1</resolution></range>
+      </plugin>
+    </link>
+  </model>
+</sdf>

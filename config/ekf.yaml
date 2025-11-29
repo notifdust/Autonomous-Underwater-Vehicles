@@ -1,0 +1,42 @@
+# Config file for robot_localization (ekf_node)
+ekf_filter_node:
+  ros__parameters:
+    frequency: 30.0
+    two_d_mode: false
+    publish_tf: true
+    use_sim_time: true # IMPORTANT for simulation
+
+    # We fuse data from the Gazebo plugins
+    
+    odom0: /odometry/raw          # Placeholder (e.g., from a DVL)
+    odom0_config: [false, false, false, # x, y, z
+                   false, false, false, # roll, pitch, yaw
+                   true,  true,  true,  # vx, vy, vz
+                   false, false, false, # vroll, vpitch, vyaw
+                   false, false, false] # ax, ay, az
+    odom0_differential: false
+
+    imu0: /imu/data
+    imu0_config: [false, false, false,  # x, y, z
+                  true,  true,  true,   # Use roll, pitch, yaw
+                  false, false, false,  # vx, vy, vz
+                  true,  true,  true,   # Use angular velocity
+                  true,  true,  true]   # Use linear acceleration
+    imu0_differential: false
+    
+    # We use a second IMU entry for the magnetometer
+    imu1: /magnetic_field
+    imu1_config: [false, false, false,
+                  false, false, true,   # Use only yaw from magnetometer
+                  false, false, false,
+                  false, false, false,
+                  false, false, false]
+    imu1_differential: false
+    
+    # Pressure sensor for depth (requires a small helper node not shown)
+    pose0: /depth_pose 
+    pose0_config: [false, false, true,  # Use only Z position
+                   false, false, false,
+                   false, false, false,
+                   false, false, false,
+                   false, false, false]
